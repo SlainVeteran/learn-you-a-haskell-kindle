@@ -22,3 +22,15 @@ pre {
 .fixed {
   font-family: monospace;
 }
+img.right {
+  float: right;
+  margin-left: 0.5em;
+}
+img.left {
+  float: left;
+  margin-right: 0.5em;
+}
+img.center {
+  display:block;
+  margin: 0.5em 0;
+}

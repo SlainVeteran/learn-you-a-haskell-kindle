@@ -9,7 +9,7 @@
 
 <h1>Modules</h1>
 <a name="loading-modules"></a><h2>Loading modules</h2>
-
+<img src="../images/modules.png" alt="modules" class="right" width="230" height="162"/>
 <p>A Haskell module is a collection of related functions, types and 
 typeclasses. A Haskell program is a collection of modules where the main
  module loads up the other modules and then uses the functions defined 
@@ -109,7 +109,7 @@ ghci&gt; transpose ["hey","there","guys"]
 </pre>
 <p>When we transpose these three lists, the third powers are then in the
  first row, the second powers in the second one and so on. Mapping <span class="fixed">sum</span> to that produces our desired result.</p>
-
+<img src="../images/legolists.png" alt="shopping lists" class="left" width="230" height="212"/>
 <p><span class="label function">foldl'</span> and <span class="label function">foldl1'</span>
  are stricter versions of their respective lazy incarnations. When using
  lazy folds on really big lists, you might often get a stack overflow 
@@ -462,7 +462,7 @@ ghci&gt; sortBy (compare `on` length) xs
 </pre>
 <p>Awesome! <span class="fixed">compare `on` length</span> ... man, that reads almost like real English! If you're not sure how exactly the <span class="fixed">on</span> works here, <span class="fixed">compare `on` length</span> is the equivalent of <span class="fixed">\x y -&gt; length x `compare` length y</span>. When you're dealing with <i>By</i> functions that take an equality function, you usually do <span class="fixed">(==) `on` something</span> and when you're dealing with <i>By</i> functions that take an ordering function, you usually do <span class="fixed">compare `on` something</span>.</p>
 <a name="data-char"></a><h2>Data.Char</h2>
-
+<img src="../images/legochar.png" alt="lego char" class="right" width="230" height="323"/>
 <p>The <span class="fixed">Data.Char</span> module does what its name 
 suggests. It exports functions that deal with characters. It's also 
 helpful when filtering and mapping over strings because they're just 
@@ -652,7 +652,7 @@ Just "555-2938"
 ghci&gt; findKey "wilma" phoneBook
 Nothing
 </pre>
-
+<img src="../images/legomap.png" alt="legomap" class="left" width="214" height="240"/>
 <p>Works like a charm! If we have the girl's phone number, we <span class="fixed">Just</span> get the number, otherwise we get <span class="fixed">Nothing</span>.</p>
 <p>We just implemented the <span class="fixed">lookup</span> function from <span class="fixed">Data.List</span>. If we want to find the corresponding value to a key, we have to traverse all the elements of the list until we find it. The <span class="fixed">Data.Map</span>
  module offers association lists that are much faster (because they're 
@@ -791,7 +791,7 @@ fromList [(3,104),(5,103),(6,339)]
 </pre>
 <p>These were just a few functions from <span class="fixed">Data.Map</span>. You can see a complete list of functions in the <a href="http://www.haskell.org/ghc/docs/latest/html/libraries/containers/Data-Map.html#v%3Aassocs">documentation</a>.</p>
 <a name="data-set"></a><h2>Data.Set</h2>
-
+<img src="../images/legosets.png" alt="legosets" class="right" width="150" height="236"/>
 <p>The <span class="fixed">Data.Set</span> module offers us, well, sets.
  Like sets from mathematics. Sets are kind of like a cross between lists
  and maps. All the elements in a set are unique. And because they're 
@@ -879,7 +879,7 @@ ghci&gt; nub "HEY WHATS CRACKALACKIN"
 </pre>
 <p><span class="fixed">setNub</span> is generally faster than <span class="fixed">nub</span> on big lists but as you can see, <span class="fixed">nub</span> preserves the ordering of the list's elements, while <span class="fixed">setNub</span> does not.</p>
 <a name="making-our-own-modules"></a><h2>Making our own modules</h2>
-
+<img src="../images/making_modules.png" alt="making modules" class="right" width="345" height="224"/>
 <p>We've looked at some cool modules so far, but how do we make our own 
 module? Almost every programming language enables you to split your code
  up into several files and Haskell is no different. When making 

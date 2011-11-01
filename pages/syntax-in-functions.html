@@ -9,7 +9,7 @@
 
 <h1 id="syntax-in-functions">Syntax in Functions</h1>
 <a name="pattern-matching"></a><h2>Pattern matching</h2>
-
+<img src="../images/pattern.png" alt="four!" class="right" width="162" height="250"/>
 <p>This chapter will cover some of Haskell's cool syntactic constructs 
 and we'll start with pattern matching. Pattern matching consists of 
 specifying patterns to which some data should conform and then checking 
@@ -194,7 +194,7 @@ again in the function body.</p>
  what would be in the first and what would be in the second list? It 
 doesn't make much sense. It would make sense to match stuff against <span class="fixed">(xs ++ [x,y,z])</span> or just <span class="fixed">(xs ++ [x])</span>, but because of the nature of lists, you can't do that.</p>
 <a name="guards-guards"></a><h2>Guards, guards!</h2>
-
+<img src="../images/guards.png" alt="guards" class="left" width="83" height="180"/>
 <p>Whereas patterns are a way of making sure a value conforms to some 
 form and deconstructing it, guards are a way of testing whether some 
 property of a value (or several of them) are true or false. That sounds a
@@ -372,7 +372,7 @@ cylinder r h =
         topArea = pi * r ^2
     in  sideArea + 2 * topArea
 </pre>
-
+<img src="../images/letitbe.png" alt="let it be" class="right" width="215" height="240"/>
 <p>The form is <span class="fixed">let &lt;bindings&gt; in &lt;expression&gt;</span>. The names that you define in the <i>let</i> part are accessible to the expression after the <i>in</i> part. As you can see, we could have also defined this with a <i>where</i>
  binding. Notice that the names are also aligned in a single column. So 
 what's the difference between the two? For now it just seems that <i>let</i> puts the bindings first and the expression that uses them later whereas <i>where</i> is the other way around.</p>
@@ -435,7 +435,7 @@ ghci&gt; boot
 in. That way, the function body is closer to its name and type 
 declaration and to some that's more readable.</p>
 <a name="case-expressions"></a><h2>Case expressions</h2>
-
+<img src="../images/case.png" alt="case" class="right" width="185" height="164"/>
 <p>Many imperative languages (C, C++, Java, etc.) have case syntax and 
 if you've ever programmed in them, you probably know what it's about. 
 It's about taking a variable and then executing blocks of code for 

@@ -9,7 +9,7 @@
 
 <h1>Recursion</h1>
 <a name="hello-recursion"></a><h2>Hello recursion!</h2>
-
+<img src="../images/recursion.png" alt="SOVIET RUSSIA" class="left" width="250" height="179"/>
 <p>We mention recursion briefly in the previous chapter. In this 
 chapter, we'll take a closer look at recursion, why it's important to 
 Haskell and how we can work out very concise and elegant solutions to 
@@ -76,7 +76,7 @@ maximum' [x] = x
 maximum' (x:xs) = max x (maximum' xs)
 </pre>
 <p>How's that for elegant! In essence, the maximum of a list is the max of the first element and the maximum of the tail.</p>
-
+<img src="../images/maxs.png" alt="max" class="center" width="651" height="267"/>
 <a name="a-few-more-recursive-functions"></a><h2>A few more recursive functions</h2>
 <p>Now that we know how to generally think recursively, let's implement a
  few functions using recursion. First off, we'll implement <span class="fixed">replicate</span>. <span class="fixed">replicate</span> takes an <span class="fixed">Int</span> and some element and returns a list that has several repetitions of the same element. For instance, <span class="fixed">replicate 3 5</span> returns <span class="fixed">[5,5,5]</span>.
@@ -104,7 +104,7 @@ take' n _
 take' _ []     = []
 take' n (x:xs) = x : take' (n-1) xs
 </pre>
-
+<img src="../images/painter.png" alt="painter" class="right" width="350" height="276"/>
 <p>The first pattern specifies that if we try to take a 0 or negative 
 number of elements, we get an empty list. Notice that we're using <span class="fixed">_</span> to match the list because we don't really care what it is in this case. Also notice that we use a guard, but without an <span class="fixed">otherwise</span> part. That means that if <span class="fixed">n</span>
  turns out to be more than 0, the matching will fall through to the next
@@ -170,7 +170,7 @@ Quicksort has become a sort of poster child for Haskell. Therefore,
 let's implement it here, even though implementing quicksort in Haskell 
 is considered really cheesy because everyone does it to showcase how 
 elegant Haskell is.</p>
-
+<img src="../images/quickman.png" alt="quickman" class="left" width="180" height="235"/>
 <p>So, the type signature is going to be <span class="fixed">quicksort :: (Ord a) =&gt; [a] -&gt; [a]</span>.
  No surprises there. The edge condition? Empty list, as is expected. A 
 sorted empty list is an empty list. Now here comes the main algorithm: <em>a
@@ -202,7 +202,7 @@ ghci&gt; quicksort "the quick brown fox jumps over the lazy dog"
 Eventually, we'll break it up so much that we reach empty lists and an 
 empty list is already sorted in a way, by virtue of being empty. Here's 
 an illustration:</p>
-
+<img src="../images/quicksort.png" alt="quicksort" class="center" width="799" height="332"/>
 <p>An element that is in place and won't move anymore is represented in <span style="color:#FF6600;font-weight:bold;">orange</span>.
  If you read them from left to right, you'll see the sorted list. 
 Although we chose to compare all the elements to the heads, we could 
@@ -217,9 +217,9 @@ tree or any other data structure. A sum is the first element of a list
 plus the sum of the rest of the list. A product of a list is the first 
 element of the list times the product of the rest of the list. The 
 length of a list is one plus the length of the tail of the list. 
-Ekcetera, ekcetera ...</p><p>
-
-</p><p>Of course, these also have edge cases. Usually the edge case is 
+Ekcetera, ekcetera ...</p>
+<img src="../images/brain.png" alt="brain" class="left" width="250" height="219"/>
+<p>Of course, these also have edge cases. Usually the edge case is 
 some scenario where a recursive application doesn't make sense. When 
 dealing with lists, the edge case is most often the empty list. If 
 you're dealing with trees, the edge case is usually a node that doesn't 

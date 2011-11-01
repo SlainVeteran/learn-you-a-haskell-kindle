@@ -31,7 +31,7 @@ closer look at functors, along with slightly stronger and more useful
 versions of functors called applicative functors. We'll also take a look
  at monoids, which are sort of like socks.</p>
 <a name="functors-redux"></a><h2>Functors redux</h2>
-
+<img src="../images/frogtor.png" alt="frogs dont even need money" class="right" width="369" height="243"/>
 <p>We've already talked about functors in <a href="http://learnyouahaskell.com/making-our-own-types-and-typeclasses#the-functor-typeclass">their own little section</a>.
  If you haven't read it yet, you should probably give it a glance right 
 now, or maybe later when you have more time. Or you can just pretend you
@@ -84,7 +84,7 @@ anything, it just presents <span class="fixed">f result</span> as the result of 
           putStrLn $ "You said " ++ line ++ " backwards!"
           putStrLn $ "Yes, you really said" ++ line ++ " backwards!"
 </pre>
-
+<img src="../images/alien.png" alt="w00ooOoooOO" class="left" width="262" height="212"/>
 <p>Just like when we <span class="fixed">fmap</span> <span class="fixed">reverse</span> over <span class="fixed">Just "blah"</span> to get <span class="fixed">Just "halb"</span>, we can <span class="fixed">fmap</span> <span class="fixed">reverse</span> over <span class="fixed">getLine</span>. <span class="fixed">getLine</span> is an I/O action that has a type of <span class="fixed">IO String</span> and mapping <span class="fixed">reverse</span> over it gives us an I/O action that will go out into the real world and get a line and then apply <span class="fixed">reverse</span> to its result. Like we can apply a function to something that's inside a <span class="fixed">Maybe</span> box, we can apply a function to what's inside an <span class="fixed">IO</span> box, only it has to go out into the real world to get something. Then when we bind it to a name by using <span class="fixed">&lt;-</span>, the name will reflect the result that already has <span class="fixed">reverse</span> applied to it.</p>
 <p>The I/O action <span class="fixed">fmap (++"!") getLine</span> behaves just like <span class="fixed">getLine</span>, only that its result always has <span class="fixed">"!"</span> appended to it!</p>
 <p>If we look at what <span class="fixed">fmap</span>'s type would be if it were limited to <span class="fixed">IO</span>, it would be <span class="fixed">fmap :: (a -&gt; b) -&gt; IO a -&gt; IO b</span>. <span class="fixed">fmap</span>
@@ -153,7 +153,7 @@ and fetch some result. Using <span class="fixed">fmap (*3)</span> on <span class
  can be functors. The function being mapped over a computation results 
 in the same computation but the result of that computation is modified 
 with the function.</p>
-
+<img src="../images/lifter.png" alt="lifting a function is easier than lifting a million pounds" class="right" width="443" height="450"/>
 <p>Before we go on to the rules that <span class="fixed">fmap</span> should follow, let's think about the type of <span class="fixed">fmap</span> once more. Its type is <span class="fixed">fmap :: (a -&gt; b) -&gt; f a -&gt; f b</span>. We're missing the class constraint <span class="fixed">(Functor f) =&gt;</span>, but we left it out here for brevity, because we're talking about functors anyway so we know what the <span class="fixed">f</span> stands for. When we first learned about <a href="http://learnyouahaskell.com/higher-order-functions#curried-functions">curried functions</a>, we said that all Haskell functions actually take one parameter. A function <span class="fixed">a -&gt; b -&gt; c</span> actually takes just one parameter of type <span class="fixed">a</span> and then returns a function <span class="fixed">b -&gt; c</span>, which takes one parameter and returns a <span class="fixed">c</span>.
  That's how if we call a function with too few parameters (i.e. 
 partially apply it), we get back a function that takes the number of 
@@ -219,7 +219,7 @@ Nothing
 </pre>
 <p>We imagine that <span class="fixed">id</span> plays the role of the <span class="fixed">f</span> parameter in the implementation. We see that if wee <span class="fixed">fmap id</span> over <span class="fixed">Just x</span>, the result will be <span class="fixed">Just (id x)</span>, and because <span class="fixed">id</span> just returns its parameter, we can deduce that <span class="fixed">Just (id x)</span> equals <span class="fixed">Just x</span>. So now we know that if we map <span class="fixed">id</span> over a <span class="fixed">Maybe</span> value with a <span class="fixed">Just</span> value constructor, we get that same value back.</p>
 <p>Seeing that mapping <span class="fixed">id</span> over a <span class="fixed">Nothing</span> value returns the same value is trivial. So from these two equations in the implementation for <span class="fixed">fmap</span>, we see that the law <span class="fixed">fmap id = id</span> holds.</p>
-
+<img src="../images/justice.png" alt="justice is blind, but so is my dog" class="left" width="345" height="428"/>
 <p><em>The second law says that composing two functions and then mapping
  the resulting function over a functor should be the same as first 
 mapping one function over the functor and then mapping the other one.</em> Formally written, that means that <span class="label law">fmap (f . g) = fmap f . fmap g</span>. Or to write it in another way, for any functor <i>F</i>, the following should hold: <span class="label law">fmap (f . g) F = fmap f (fmap g F)</span>.</p>
@@ -306,7 +306,7 @@ number, it will be multiplied by three and then it will go through the
 attached transformation where it will be added to three. This is what 
 happens with composition.</p>
 <a name="applicative-functors"></a><h2>Applicative functors</h2>
-
+<img src="../images/present.png" class="right" width="302" height="284" alt="disregard this analogy"/>
 <p>In this section, we'll take a look at applicative functors, which are beefed up functors, represented in Haskell by the <span class="fixed">Applicative</span> typeclass, found in the <span class="fixed">Control.Applicative</span> module.</p>
 <p>As you know, functions in Haskell are curried by default, which means
  that a function that seems to take several parameters actually takes 
@@ -412,7 +412,7 @@ Nothing
 ghci&gt; pure (+) &lt;*&gt; Nothing &lt;*&gt; Just 5
 Nothing
 </pre>
-
+<img src="../images/whale.png" alt="whaale" class="right" width="214" height="177"/>
 <p>What's going on here? Let's take a look, step by step. <span class="fixed">&lt;*&gt;</span> is left-associative, which means that <span class="fixed">pure (+) &lt;*&gt; Just 3 &lt;*&gt; Just 5</span> is the same as <span class="fixed">(pure (+) &lt;*&gt; Just 3) &lt;*&gt; Just 5</span>. First, the <span class="fixed">+</span> function is put in a functor, which is in this case a <span class="fixed">Maybe</span> value that contains the function. So at first, we have <span class="fixed">pure (+)</span>, which is <span class="fixed">Just (+)</span>. Next, <span class="fixed">Just (+) &lt;*&gt; Just 3</span> happens. The result of this is <span class="fixed">Just (3+)</span>. This is because of partial application. Only applying <span class="fixed">3</span> to the <span class="fixed">+</span> function results in a function that takes one parameter and adds 3 to it. Finally, <span class="fixed">Just (3+) &lt;*&gt; Just 5</span> is carried out, which results in a <span class="fixed">Just 8</span>. </p>
 <p>Isn't this awesome?! Applicative functors and the applicative style of doing <span class="fixed">pure f &lt;*&gt; x &lt;*&gt; y &lt;*&gt; ...</span>
  allow us to take a function that expects parameters that aren't 
@@ -520,7 +520,7 @@ mapping.</p>
         x &lt;- b
         return (f x)
 </pre>
-
+<img src="../images/knight.png" alt="ahahahah!" class="left" width="195" height="458"/>
 <p>Since <span class="fixed">pure</span> is all about putting a value in a minimal context that still holds it as its result, it makes sense that <span class="fixed">pure</span> is just <span class="fixed">return</span>, because <span class="fixed">return</span>
  does exactly that; it makes an I/O action that doesn't do anything, it 
 just yields some value as its result, but it doesn't really do any I/O 
@@ -599,7 +599,7 @@ functions, we get back a function. So what goes on here? When we do <span class=
 <pre name="code" class="haskell:hs">ghci&gt; (\x y z -&gt; [x,y,z]) &lt;$&gt; (+3) &lt;*&gt; (*2) &lt;*&gt; (/2) $ 5
 [8.0,10.0,2.5]
 </pre>
-
+<img src="../images/jazzb.png" alt="SLAP" class="right" width="400px" height="230px"/>
 <p>Same here. We create a function that will call the function <span class="fixed">\x y z -&gt; [x,y,z]</span> with the eventual results from <span class="fixed">(+3)</span>, <span class="fixed">(*2)</span> and <span class="fixed">(/2)</span>. The <span class="fixed">5</span> gets fed to each of the three functions and then <span class="fixed">\x y z -&gt; [x, y, z]</span> gets called with those results.</p>
 <p>You can think of functions as boxes that contain their eventual results, so doing <span class="fixed">k &lt;$&gt; f &lt;*&gt; g</span> creates a function that will call <span class="fixed">k</span> with the eventual results from <span class="fixed">f</span> and <span class="fixed">g</span>. When we do something like <span class="fixed">(+) &lt;$&gt; Just 3 &lt;*&gt; Just 5</span>, we're using <span class="fixed">+</span> on values that might or might not be there, which also results in a value that might or might not be there. When we do <span class="fixed">(+) &lt;$&gt; (+10) &lt;*&gt; (+5)</span>, we're using <span class="fixed">+</span> on the future return values of <span class="fixed">(+10)</span> and <span class="fixed">(+5)</span> and the result is also something that will produce a value only when called with a parameter.</p>
 <p>We don't often use functions as applicatives, but this is still 
@@ -813,7 +813,7 @@ using <span class="fixed">&lt;$&gt;</span> and <span class="fixed">&lt;*&gt;</sp
 applicative functors and take advantage of the semantics of each one.</p>
 <a name="the-newtype-keyword"></a><h2>The newtype keyword</h2>
 
-
+<img src="../images/maoi.png" alt="why_ so serious?" class="left" width="107" height="202"/>
 
 <p>
 So far, we've learned how to make our own algebraic data types by using the 
@@ -1008,7 +1008,7 @@ we look at <span class="fixed">fmap</span> like it only worked on
 <pre name="code" class="haskell:hs">fmap :: (a -&gt; b) -&gt; Maybe a -&gt; Maybe b
 </pre>
 
-
+<img src="../images/krakatoa.png" alt="wow, very evil" class="right" width="322px" height="280px"/>
 
 <p>
 Isn't that just peachy? Now what if we wanted to make the tuple an instance of
@@ -1170,7 +1170,7 @@ value:
 "hello"
 </pre>
 
-
+<img src="../images/shamrock.png" alt="top of the mornin to ya!!!" class="right" width="184" height="230"/>
 
 <p>
 It worked! Hmmm, why is that? Well, like we've said, when we use <i>newtype</i>, 
@@ -1289,7 +1289,7 @@ keyword.
 
 <a name="monoids"></a><h2>Monoids</h2>
 
-
+<img src="../images/pirateship.png" alt="wow this is pretty much the gayest pirate ship ever" class="right" width="460" height="417"/>
 
 <p>
 Type classes in Haskell are used to present an interface for types that have 
@@ -1389,7 +1389,7 @@ is defined:
     mconcat = foldr mappend mempty
 </pre>
 
-
+<img src="../images/balloondog.png" alt="woof dee do!!!" class="right" width="260" height="326"/>
 
 <p>
 The <span class="fixed">Monoid</span> type class is defined in 
@@ -1510,7 +1510,7 @@ ghci&gt; mempty :: [a]
 []
 </pre>
 
-
+<img src="../images/smug.png" alt="smug as hell" class="left" width="157" height="144"/>
 
 <p>
 Notice that in the last line, we had to write an explicit type annotation, 
@@ -1780,7 +1780,7 @@ we've met so far and also quite useful:
     GT `mappend` _ = GT
 </pre>
 
-
+<img src="../images/bear.png" alt="did anyone ORDER pizza?!?! I can't BEAR these puns!" class="right" width="330" height="339"/>
 
 <p>
 The instance is set up like this: when we <span class="fixed">mappend</span> two
@@ -2159,7 +2159,7 @@ This is how we make <span class="fixed">Tree</span> an instance of
                              F.foldMap f r
 </pre>
 
-
+<img src="../images/accordion.png" alt="find the visual pun or whatever" class="right" width="366" height="280"/>
 
 <p>
 We think like this: if we are provided with a function that takes an element of 

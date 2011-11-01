@@ -19,7 +19,7 @@ typeclasses. In this chapter, we'll learn how to make our own and how to
 <p>In a similar fashion, we can think of the <span class="fixed">Int</span> type as being defined like this:</p>
 <pre name="code" class="haskell:hs">data Int = -2147483648 | -2147483647 | ... | -1 | 0 | 1 | 2 | ... | 2147483647
 </pre>
-
+<img src="../images/caveman.png" alt="caveman" class="left" width="220" height="215"/>
 <p>The first and last value constructors are the minimum and maximum possible values of <span class="fixed">Int</span>.
  It's not actually defined like this, the ellipses are here because we 
 omitted a heapload of numbers, so this is just for illustrative 
@@ -166,7 +166,7 @@ other functions that are exported return a type, we can use them to make
 abstract in such a way that we hide their implementation. Also, whoever 
 uses our module can't pattern match against the value constructors.</p>
 <a name="record-syntax"></a><h2>Record syntax</h2>
-
+<img src="../images/record.png" alt="record" class="right" width="208" height="97"/>
 <p>OK, we've been tasked with creating a data type that describes a 
 person. The info that we want to store about that person is: first name,
  last name, age, height, phone number, and favorite ice-cream flavor. I 
@@ -265,7 +265,7 @@ picture of what type parameters work like in action, let's take a look
 at how a type we've already met is implemented.</p>
 <pre name="code" class="haskell:hs">data Maybe a = Nothing | Just a
 </pre>
-
+<img src="../images/yeti.png" alt="yeti" class="left" width="209" height="260"/>
 <p>The <span class="fixed">a</span> here is the type parameter. And because there's a type parameter involved, we call <span class="fixed">Maybe</span> a type constructor. Depending on what we want this data type to hold when it's not <span class="fixed">Nothing</span>, this type constructor can end up producing a type of <span class="fixed">Maybe Int</span>, <span class="fixed">Maybe Car</span>, <span class="fixed">Maybe String</span>, etc. No value can have a type of just <span class="fixed">Maybe</span>,
  because that's not a type per se, it's a type constructor. In order for
  this to be a real type that a value can be part of, it has to have all 
@@ -333,7 +333,7 @@ Car "Ford" "Mustang" 1967 :: (Num t) =&gt; Car [Char] [Char] t
 ghci&gt; :t Car "Ford" "Mustang" "nineteen sixty seven"
 Car "Ford" "Mustang" "nineteen sixty seven" :: Car [Char] [Char] [Char]
 </pre>
-
+<img src="../images/meekrat.png" alt="meekrat" class="right" width="150" height="267"/>
 <p>In real life though, we'd end up using <span class="fixed">Car String String Int</span> most of the time and so it would seem that parameterizing the <span class="fixed">Car</span>
  type isn't really worth it. We usually use type parameters when the 
 type that's contained inside the data type's various value constructors 
@@ -391,7 +391,7 @@ ghci&gt; Vector 2 9 3 `vectMult` (Vector 4 9 5 `scalarMult` Vector 9 2 4)
 Vector 148 666 222
 </pre>
 <a name="derived-instances"></a><h2>Derived instances</h2>
-
+<img src="../images/gob.png" alt="gob" class="right" width="112" height="350"/>
 <p>In the <a href="http://learnyouahaskell.com/types-and-typeclasses#typeclasses-101">Typeclasses 101</a>
  section, we explained the basics of typeclasses. We explained that a 
 typeclass is a sort of an interface that defines some behavior. A type 
@@ -559,7 +559,7 @@ library defines <span class="fixed">String</span> as a synonym for <span class="
  </p>
  <pre name="code" class="haskell:hs"> type String = [Char]
  </pre>
- 
+<img src="../images/chicken.png" alt="chicken" class="left" width="169" height="225"/>
  <p>
  We've introduced the <i>type</i> keyword. The keyword might be misleading to some, because we're not actually making anything new (we did that with the <i>data</i> keyword), but we're just making a synonym for an already existing type.
  </p>
@@ -721,7 +721,7 @@ Right "QOTSA"
 the result but then we wouldn't know why we couldn't get the code. But 
 now, we have information about the failure in our result type.</p>
 <a name="recursive-data-structures"></a><h2>Recursive data structures</h2>
-
+<img src="../images/thefonz.png" alt="the fonz" class="right" width="168" height="301"/>
 <p>As we've seen, a constructor in an algebraic data type can have 
 several (or none at all) fields and each field must be of some concrete 
 type. With that in mind, we can make types whose constructors have 
@@ -797,7 +797,7 @@ ghci&gt; a .++ b
 <p>Notice how we pattern matched on <span class="fixed">(x :-: xs)</span>. That works because pattern matching is actually about matching constructors. We can match on <span class="fixed">:-:</span> because it is a constructor for our own list type and we can also match on <span class="fixed">:</span> because it is a constructor for the built-in list type. Same goes for <span class="fixed">[]</span>.
  Because pattern matching works (only) on constructors, we can match for
  stuff like that, normal prefix constructors or stuff like <span class="fixed">8</span> or <span class="fixed">'a'</span>, which are basically constructors for the numeric and character types, respectively.</p>
-
+<img src="../images/binarytree.png" alt="binary search tree" class="left" width="323" height="225"/>
 <p>Now, we're going to implement a <em>binary search tree</em>. If 
 you're not familiar with binary search trees from languages like C, 
 here's what they are: an element points to two elements, one on its left
@@ -913,7 +913,7 @@ False
 powerful concept in Haskell. We can use them to make anything from 
 boolean values and weekday enumerations to binary search trees and more!</p>
 <a name="typeclasses-102"></a><h2>Typeclasses 102</h2>
-
+<img src="../images/trafficlight.png" alt="tweet" class="right" width="175" height="480"/>
 <p>So far, we've learned about some of the standard Haskell typeclasses 
 and we've seen which types are in them. We've also learned how to 
 automatically make our own types instances of the standard typeclasses 
@@ -1047,7 +1047,7 @@ some type. For instance, here we required the contents of the <span class="fixed
 mentally putting your type into the function type declarations as well. <span class="fixed">(==) :: Maybe -&gt; Maybe -&gt; Bool</span> doesn't make much sense but <span class="fixed">(==) :: (Eq m) =&gt; Maybe m -&gt; Maybe m -&gt; Bool</span> does. But this is just something to think about, because <span class="fixed">==</span> will always have a type of <span class="fixed">(==) :: (Eq a) =&gt; a -&gt; a -&gt; Bool</span>, no matter what instances we make.</div>
 <p>Ooh, one more thing, check this out! If you want to see what the instances of a typeclass are, just do <span class="fixed">:info YourTypeClass</span> in GHCI. So typing <span class="fixed">:info Num</span> will show which functions the typeclass defines and it will give you a list of the types in the typeclass. <span class="fixed">:info</span> works for types and type constructors too. If you do <span class="fixed">:info Maybe</span>, it will show you all the typeclasses that <span class="fixed">Maybe</span> is an instance of. Also <span class="fixed">:info</span> can show you the type declaration of a function. I think that's pretty cool.</p>
 <a name="a-yes-no-typeclass"></a><h2>A yes-no typeclass</h2>
-
+<img src="../images/yesno.png" alt="yesno" class="left" width="201" height="111"/>
 <p>In JavaScript and some other weakly typed languages, you can put 
 almost anything inside an if expression. For example, you can do all of 
 the following: <span class="fixed">if (0) alert("YEAH!") else alert("NO!")</span>, <span class="fixed">if ("") alert ("YEAH!") else alert("NO!")</span>, <span class="fixed">if (false) alert("YEAH") else alert("NO!)</span>, etc. and all of these will throw an alert of <span class="fixed">NO!</span>. If you do <span class="fixed">if ("WHAT") alert ("YEAH") else alert("NO!")</span>, it will alert a <span class="fixed">"YEAH!"</span> because JavaScript considers non-empty strings to be a sort of true-ish value.</p>
@@ -1151,7 +1151,7 @@ part of the <span class="fixed">Functor</span> typeclass.</p>
 <pre name="code" class="haskell:hs">class Functor f where
     fmap :: (a -&gt; b) -&gt; f a -&gt; f b
 </pre>
-
+<img src="../images/functor.png" alt="I AM FUNCTOOOOR!!!" class="right" width="220" height="441"/>
 <p>Alright. We see that it defines one function, <span class="fixed">fmap</span>, and doesn't provide any default implementation for it. The type of <span class="fixed">fmap</span>
  is interesting. In the definitions of typeclasses so far, the type 
 variable that played the role of the type in the typeclass was a 
@@ -1245,7 +1245,7 @@ are smaller than the node and the right sub-tree only has nodes that are
 We'll go over the functor laws in more detail in one of the next 
 chapters.</div>
 <a name="kinds-and-some-type-foo"></a><h2>Kinds and some type-foo</h2>
-
+<img src="../images/typefoo.png" alt="TYPE FOO MASTER" class="right" width="287" height="400"/>
 <p>Type constructors take other types as parameters to eventually 
 produce concrete types. That kind of reminds me of functions, which take
  values as parameters to produce values. We've seen that type 

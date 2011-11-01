@@ -8,7 +8,7 @@
 <body>
 
 <h1>Higher order functions</h1>
-
+<img src="../images/sun.png" alt="sun" class="right" width="203" height="183"/>
 <p>Haskell functions can take functions as parameters and return 
 functions as return values. A function that does either of those is 
 called a higher order function. Higher order functions aren't just a 
@@ -31,7 +31,7 @@ concept. The following two calls are equivalent:</p>
 ghci&gt; (max 4) 5
 5
 </pre>
-
+<img src="../images/curry.png" alt="haskell curry" class="left" width="160" height="238"/>
 <p>Putting a space between two things is simply <b>function application</b>. The space is sort of like an operator and it has the highest precedence. Let's examine the type of <span class="fixed">max</span>. It's <span class="fixed">max :: (Ord a) =&gt; a -&gt; a -&gt; a</span>. That can also be written as <span class="fixed">max :: (Ord a) =&gt; a -&gt; (a -&gt; a)</span>. That could be read as: <span class="fixed">max</span> takes an <span class="fixed">a</span> and returns (that's the <span class="fixed">-&gt;</span>) a function that takes an <span class="fixed">a</span> and returns an <span class="fixed">a</span>. That's why the return type and the parameters of functions are all simply separated with arrows.</p>
 <p>So how is that beneficial to us? Simply speaking, if we call a function with too few parameters, we get back a <em>partially applied</em>
  function, meaning a function that takes as many parameters as we left 
@@ -94,7 +94,7 @@ function and then applies it twice to something!</p>
 <pre name="code" class="haskell:hs">applyTwice :: (a -&gt; a) -&gt; a -&gt; a
 applyTwice f x = f (f x)
 </pre>
-
+<img src="../images/bonus.png" alt="rocktopus" class="right" width="166" height="190"/>
 <p>First of all, notice the type declaration. Before, we didn't need parentheses because <span class="fixed">-&gt;</span>
  is naturally right-associative. However, here, they're mandatory. They 
 indicate that the first parameter is a function that takes something and
@@ -257,7 +257,7 @@ quicksort (x:xs) =
         biggerSorted = quicksort (filter (&gt;x) xs) 
     in  smallerSorted ++ [x] ++ biggerSorted
 </pre>
-
+<img src="../images/map.png" alt="map" class="left" width="210" height="115"/>
 <p>Mapping and filtering is the bread and butter of every functional 
 programmer's toolbox. Uh. It doesn't matter if you do it with the <span class="fixed">map</span> and <span class="fixed">filter</span>
  functions or list comprehensions. Recall how we solved the problem of 
@@ -354,7 +354,7 @@ ghci&gt; (listOfFuns !! 4) 5
 </pre>
 <p>Getting the element with the index <span class="fixed">4</span> from our list returns a function that's equivalent to <span class="fixed">(4*)</span>. And then, we just apply <span class="fixed">5</span> to that function. So that's like writing <span class="fixed">(4*) 5</span> or just <span class="fixed">4 * 5</span>.</p>
 <a name="lambdas"></a><h2>Lambdas</h2>
-
+<img src="../images/lambda.png" alt="lambda" class="right" width="203" height="230"/>
 <p>Lambdas are basically anonymous functions that are used because we 
 need some functions only once. Normally, we make a lambda with the sole 
 purpose of passing it to a higher-order function. To make a lambda, we 
@@ -366,7 +366,7 @@ parameters, separated by spaces. After that comes a <span class="fixed">-&gt;</s
 numLongChains = length (filter (\xs -&gt; length xs &gt; 15) (map chain [1..100]))
 </pre>
 <p>Lambdas are expressions, that's why we can just pass them like that. The expression <span class="fixed">(\xs -&gt; length xs &gt; 15)</span> returns a function that tells us whether the length of the list passed to it is greater than 15.</p>
-
+<img src="../images/lamb.png" alt="lamb" class="left" width="200" height="134"/>
 <p>People who are not well acquainted with how currying and partial 
 application works often use lambdas where they don't need to. For 
 instance, the expressions <span class="fixed">map (+3) [1,6,3,2]</span> and <span class="fixed">map (\x -&gt; x + 3) [1,6,3,2]</span> are equivalent since both <span class="fixed">(+3)</span> and <span class="fixed">(\x -&gt; x + 3)</span>
@@ -410,7 +410,7 @@ resulting function on to a map or a filter. So use lambdas in this way
 when you want to make it explicit that your function is mainly meant to 
 be partially applied and passed on to a function as a parameter.</p>
 <a name="folds"></a><h2>Only folds and horses</h2>
-
+<img src="../images/origami.png" alt="folded bird" class="right" width="220" height="221"/>
 <p>Back when we were dealing with recursion, we noticed a theme 
 throughout many of the recursive functions that operated on lists. 
 Usually, we'd have an edge case for the empty list. We'd introduce the <span class="fixed">x:xs</span>
@@ -439,7 +439,7 @@ sum' xs = foldl (\acc x -&gt; acc + x) 0 xs
 <pre name="code" class="haskell:ghci">ghci&gt; sum' [3,5,2,1]
 11
 </pre>
-
+<img src="../images/foldl.png" alt="foldl" class="left" width="172" height="348"/>
 <p>Let's take an in-depth look into how this fold happens. <span class="fixed">\acc x -&gt; acc + x</span> is the binary function. <span class="fixed">0</span> is the starting value and <span class="fixed">xs</span> is the list to be folded up. Now first, <span class="fixed">0</span> is used as the <span class="fixed">acc</span> parameter to the binary function and <span class="fixed">3</span> is used as the <span class="fixed">x</span> (or the current element) parameter. <span class="fixed">0 + 3</span> produces a <span class="fixed">3</span> and it becomes the new accumulator value, so to speak. Next up, <span class="fixed">3</span> is used as the accumulator value and <span class="fixed">5</span> as the current element and <span class="fixed">8</span> becomes the new accumulator value. Moving forward, <span class="fixed">8</span> is the accumulator value, <span class="fixed">2</span> is the current element, the new accumulator value is <span class="fixed">10</span>. Finally, that <span class="fixed">10</span> is used as the accumulator value and <span class="fixed">1</span> as the current element, producing an <span class="fixed">11</span>. Congratulations, you've done a fold! </p>
 <p>This professional diagram on the left illustrates how a fold happens,
  step by step (day by day!). The greenish brown number is the 
@@ -481,7 +481,7 @@ map' f xs = foldr (\x acc -&gt; f x : acc) [] xs
 </pre>
 <p>If we're mapping <span class="fixed">(+3)</span> to <span class="fixed">[1,2,3]</span>, we approach the list from the right side. We take the last element, which is <span class="fixed">3</span> and apply the function to it, which ends up being <span class="fixed">6</span>. Then, we prepend it to the accumulator, which is was <span class="fixed">[]</span>. <span class="fixed">6:[]</span> is <span class="fixed">[6]</span> and that's now the accumulator. We apply <span class="fixed">(+3)</span> to <span class="fixed">2</span>, that's <span class="fixed">5</span> and we prepend (<span class="fixed">:</span>) it to the accumulator, so the accumulator is now <span class="fixed">[5,6]</span>. We apply <span class="fixed">(+3)</span> to <span class="fixed">1</span> and prepend that to the accumulator and so the end value is <span class="fixed">[4,5,6]</span>.</p>
 <p>Of course, we could have implemented this function with a left fold too. It would be <span class="fixed">map' f xs = foldl (\acc x -&gt; acc ++ [f x]) [] xs</span>, but the thing is that the <span class="fixed">++</span> function is much more expensive than <span class="fixed">:</span>, so we usually use right folds when we're building up new lists from a list.</p>
-
+<img src="../images/washmachine.png" alt="fold this up!" class="right" width="250" height="205"/>
 <p>If you reverse a list, you can do a right fold on it just like you 
 would have done a left fold and vice versa. Sometimes you don't even 
 have to do that. The <span class="fixed">sum</span> function can be 
@@ -566,7 +566,7 @@ ghci&gt; sum (map sqrt [1..130])
 <pre name="code" class="haskell:hs">($) :: (a -&gt; b) -&gt; a -&gt; b
 f $ x = f x
 </pre>
-
+<img src="../images/dollar.png" alt="dollar" class="left" width="180" height="136"/>
 <p>What the heck? What is this useless operator? It's just function 
 application! Well, almost, but not quite! Whereas normal function 
 application (putting a space between two things) has a really high 
@@ -590,7 +590,7 @@ function. That way, we can, for instance, map function application over a
 <pre name="code" class="haskell:hs">(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 f . g = \x -&gt; f (g x)
 </pre>
-
+<img src="../images/notes.png" alt="notes" class="left" width="230" height="198"/>
 <p>Mind the type declaration. <span class="fixed">f</span> must take as its parameter a value that has the same type as <span class="fixed">g</span>'s return value. So the resulting function takes a parameter of the same type that <span class="fixed">g</span> takes and returns a value of the same type that <span class="fixed">f</span> returns. The expression <span class="fixed">negate . (* 3)</span> returns a function that takes a number, multiplies it by 3 and then negates it.</p>
 <p>One of the uses for function composition is making functions on the 
 fly to pass to other functions. Sure, can use lambdas for that, but many
